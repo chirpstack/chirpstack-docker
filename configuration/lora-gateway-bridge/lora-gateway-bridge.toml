@@ -1,0 +1,83 @@
+[general]
+# debug=5, info=4, warning=3, error=2, fatal=1, panic=0
+log_level = 4
+
+
+# Configuration which relates to the packet-forwarder.
+[packet_forwarder]
+# ip:port to bind the UDP listener to
+#
+# Example: 0.0.0.0:1700 to listen on port 1700 for all network interfaces.
+# This is the listeren to which the packet-forwarder forwards its data
+# so make sure the 'serv_port_up' and 'serv_port_down' from your
+# packet-forwarder matches this port.
+udp_bind = "0.0.0.0:1700"
+
+# Skip the CRC status-check of received packets
+#
+# This is only has effect when the packet-forwarder is configured to forward
+# LoRa frames with CRC errors.
+skip_crc_check = false
+
+
+# Configuration for the MQTT backend.
+[backend.mqtt]
+# MQTT topic templates for the different MQTT topics.
+#
+# The meaning of these topics are documented at:
+# https://docs.loraserver.io/lora-gateway-bridge/use/data/
+#
+# The default values match the default expected configuration of the
+# LoRa Server MQTT backend. Therefore only change these values when
+# absolutely needed.
+# Use "{{ .MAC }}" as an substitution for the LoRa gateway MAC. 
+uplink_topic_template="gateway/{{ .MAC }}/rx"
+downlink_topic_template="gateway/{{ .MAC }}/tx"
+stats_topic_template="gateway/{{ .MAC }}/stats"
+ack_topic_template="gateway/{{ .MAC }}/ack"
+
+# MQTT server (e.g. scheme://host:port where scheme is tcp, ssl or ws)
+server="tcp://mosquitto:1883"
+
+# Connect with the given username (optional)
+username=""
+
+# Connect with the given password (optional)
+password=""
+
+# Quality of service level
+#
+# 0: at most once
+# 1: at least once
+# 2: exactly once
+#
+# Note: an increase of this value will decrease the performance.
+# For more information: https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels
+qos=0
+
+# Clean session
+#
+# Set the "clean session" flag in the connect message when this client
+# connects to an MQTT broker. By setting this flag you are indicating
+# that no messages saved by the broker for this client should be delivered.
+clean_session=true
+
+# Client ID
+#
+# Set the client id to be used by this client when connecting to the MQTT
+# broker. A client id must be no longer than 23 characters. When left blank,
+# a random id will be generated. This requires clean_session=true.
+client_id=""
+
+# CA certificate file (optional)
+#
+# Use this when setting up a secure connection (when server uses ssl://...)
+# but the certificate used by the server is not trusted by any CA certificate
+# on the server (e.g. when self generated).
+ca_cert=""
+
+# mqtt TLS certificate file (optional)
+tls_cert=""
+
+# mqtt TLS key file (optional)
+tls_key=""

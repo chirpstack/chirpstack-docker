@@ -1,0 +1,216 @@
+[general]
+# Log level
+#
+# debug=5, info=4, warning=3, error=2, fatal=1, panic=0
+log_level=4
+
+# The number of times passwords must be hashed. A higher number is safer as
+# an attack takes more time to perform.
+password_hash_iterations=100000
+
+
+# PostgreSQL settings.
+#
+# Please note that PostgreSQL 9.5+ is required.
+[postgresql]
+# PostgreSQL dsn (e.g.: postgres://user:password@hostname/database?sslmode=disable).
+#
+# Besides using an URL (e.g. 'postgres://user:password@hostname/database?sslmode=disable')
+# it is also possible to use the following format:
+# 'user=loraserver dbname=loraserver sslmode=disable'.
+#
+# The following connection parameters are supported:
+#
+# * dbname - The name of the database to connect to
+# * user - The user to sign in as
+# * password - The user's password
+# * host - The host to connect to. Values that start with / are for unix domain sockets. (default is localhost)
+# * port - The port to bind to. (default is 5432)
+# * sslmode - Whether or not to use SSL (default is require, this is not the default for libpq)
+# * fallback_application_name - An application_name to fall back to if one isn't provided.
+# * connect_timeout - Maximum wait for connection, in seconds. Zero or not specified means wait indefinitely.
+# * sslcert - Cert file location. The file must contain PEM encoded data.
+# * sslkey - Key file location. The file must contain PEM encoded data.
+# * sslrootcert - The location of the root certificate file. The file must contain PEM encoded data.
+#
+# Valid values for sslmode are:
+#
+# * disable - No SSL
+# * require - Always SSL (skip verification)
+# * verify-ca - Always SSL (verify that the certificate presented by the server was signed by a trusted CA)
+# * verify-full - Always SSL (verify that the certification presented by the server was signed by a trusted CA and the server host name matches the one in the certificate)
+dsn="postgres://loraserver_as:loraserver_as@postgresql/loraserver_as?sslmode=disable"
+
+# Automatically apply database migrations.
+#
+# It is possible to apply the database-migrations by hand
+# (see https://github.com/brocaar/lora-app-server/tree/master/migrations)
+# or let LoRa App Server migrate to the latest state automatically, by using
+# this setting. Make sure that you always make a backup when upgrading Lora
+# App Server and / or applying migrations.
+automigrate=true
+
+
+# Redis settings
+#
+# Please note that Redis 2.6.0+ is required.
+[redis]
+# Redis url (e.g. redis://user:password@hostname/0)
+#
+# For more information about the Redis URL format, see:
+# https://www.iana.org/assignments/uri-schemes/prov/redis
+url="redis://redis:6379"
+
+
+# Application-server settings.
+[application_server]
+# Application-server identifier.
+#
+# Random UUID defining the id of the application-server installation (used by
+# LoRa Server as routing-profile id).
+# For now it is recommended to not change this id.
+id="6d5db27e-4ce2-4b2b-b5d7-91f069397978"
+
+
+  # MQTT integration configuration used for publishing (data) events
+  # and scheduling downlink application payloads.
+  # Next to this integration which is always available, the user is able to
+  # configure additional per-application integrations.
+  [application_server.integration.mqtt]
+  # MQTT topic templates for the different MQTT topics.
+  #
+  # The meaning of these topics are documented at:
+  # https://docs.loraserver.io/lora-app-server/integrate/data/
+  #
+  # The following substitutions can be used:
+  # * "{{ .ApplicationID }}" for the application id.
+  # * "{{ .DevEUI }}" for the DevEUI of the device.
+  #
+  # Note: the downlink_topic_template must contain both the application id and
+  # DevEUI substitution!
+  uplink_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/rx"
+  downlink_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/tx"
+  join_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/join"
+  ack_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/ack"
+  error_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/error"
+
+  # MQTT server (e.g. scheme://host:port where scheme is tcp, ssl or ws)
+  server="tcp://mosquitto:1883"
+
+  # Connect with the given username (optional)
+  username=""
+
+  # Connect with the given password (optional)
+  password=""
+
+  # Quality of service level
+  #
+  # 0: at most once
+  # 1: at least once
+  # 2: exactly once
+  #
+  # Note: an increase of this value will decrease the performance.
+  # For more information: https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels
+  qos=0
+
+  # Clean session
+  #
+  # Set the "clean session" flag in the connect message when this client
+  # connects to an MQTT broker. By setting this flag you are indicating
+  # that no messages saved by the broker for this client should be delivered.
+  clean_session=true
+
+  # Client ID
+  #
+  # Set the client id to be used by this client when connecting to the MQTT
+  # broker. A client id must be no longer than 23 characters. When left blank,
+  # a random id will be generated. This requires clean_session=true.
+  client_id=""
+
+  # CA certificate file (optional)
+  #
+  # Use this when setting up a secure connection (when server uses ssl://...)
+  # but the certificate used by the server is not trusted by any CA certificate
+  # on the server (e.g. when self generated).
+  ca_cert=""
+
+  # TLS certificate file (optional)
+  tls_cert=""
+
+  # TLS key file (optional)
+  tls_key=""
+
+
+  # Settings for the "internal api"
+  #
+  # This is the API used by LoRa Server to communicate with LoRa App Server
+  # and should not be exposed to the end-user.
+  [application_server.api]
+  # ip:port to bind the api server
+  bind="0.0.0.0:8001"
+
+  # ca certificate used by the api server (optional)
+  ca_cert=""
+
+  # tls certificate used by the api server (optional)
+  tls_cert=""
+
+  # tls key used by the api server (optional)
+  tls_key=""
+
+  # Public ip:port of the application-server API.
+  #
+  # This is used by LoRa Server to connect to LoRa App Server. When running
+  # LoRa App Server on a different host than LoRa Server, make sure to set
+  # this to the host:ip on which LoRa Server can reach LoRa App Server.
+  # The port must be equal to the port configured by the 'bind' flag
+  # above.
+  public_host="appserver:8001"
+
+
+  # Settings for the "external api"
+  #
+  # This is the API and web-interface exposed to the end-user.
+  [application_server.external_api]
+  # ip:port to bind the (user facing) http server to (web-interface and REST / gRPC api)
+  bind="0.0.0.0:8080"
+
+  # http server TLS certificate
+  tls_cert="/etc/lora-app-server/certs/http.pem"
+
+  # http server TLS key
+  tls_key="/etc/lora-app-server/certs/http-key.pem"
+
+  # JWT secret used for api authentication / authorization
+  # You could generate this by executing 'openssl rand -base64 32' for example
+  jwt_secret="verysecret"
+
+  # when set, existing users can't be re-assigned (to avoid exposure of all users to an organization admin)"
+  disable_assign_existing_users=false
+
+
+
+# Join-server configuration.
+#
+# LoRa App Server implements a (subset) of the join-api specified by the
+# LoRaWAN Backend Interfaces specification. This API is used by LoRa Server
+# to handle join-requests.
+[join_server]
+# ip:port to bind the join-server api interface to
+bind="0.0.0.0:8003"
+
+# ca certificate used by the join-server api server
+ca_cert=""
+
+# tls certificate used by the join-server api server (optional)
+tls_cert=""
+
+# tls key used by the join-server api server (optional)
+tls_key=""
+
+
+# Network-server configuration.
+#
+# This configuration is only used to migrate from older LoRa App Server.
+[network_server]
+server="127.0.0.1:8000"
