@@ -2,19 +2,19 @@ version: "2"
 
 services:
   loraserver:
-    image: loraserver/loraserver:latest
+    image: loraserver/loraserver:1
     volumes:
       - ./configuration/loraserver:/etc/loraserver
 
   appserver:
-    image: loraserver/lora-app-server:latest
+    image: loraserver/lora-app-server:1
     ports:
       - 8080:8080
     volumes:
       - ./configuration/lora-app-server:/etc/lora-app-server
 
   gatewaybridge:
-    image: loraserver/lora-gateway-bridge:latest
+    image: loraserver/lora-gateway-bridge:2
     ports:
       - 1700:1700/udp
     volumes:
