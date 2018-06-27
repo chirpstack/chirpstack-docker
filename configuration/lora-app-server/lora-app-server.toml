@@ -88,11 +88,11 @@ id="6d5db27e-4ce2-4b2b-b5d7-91f069397978"
   #
   # Note: the downlink_topic_template must contain both the application id and
   # DevEUI substitution!
-  uplink_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/rx"
-  downlink_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/tx"
-  join_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/join"
-  ack_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/ack"
-  error_topic_template="application/{{ .ApplicationID }}/node/{{ .DevEUI }}/error"
+  uplink_topic_template="application/{{ .ApplicationID }}/device/{{ .DevEUI }}/rx"
+  downlink_topic_template="application/{{ .ApplicationID }}/device/{{ .DevEUI }}/tx"
+  join_topic_template="application/{{ .ApplicationID }}/device/{{ .DevEUI }}/join"
+  ack_topic_template="application/{{ .ApplicationID }}/device/{{ .DevEUI }}/ack"
+  error_topic_template="application/{{ .ApplicationID }}/device/{{ .DevEUI }}/error"
 
   # MQTT server (e.g. scheme://host:port where scheme is tcp, ssl or ws)
   server="tcp://mosquitto:1883"
