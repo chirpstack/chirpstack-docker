@@ -37,6 +37,12 @@ To start all the LoRa Server components, simply run:
 $ docker-compose up
 ```
 
+**Note:** during the startup of services, it is normal to see the following errors:
+
+* ping database error, will retry in 2s: dial tcp 172.20.0.4:5432: connect: connection refused
+* ping database error, will retry in 2s: pq: the database system is starting up
+
+
 After all the components have been initialized and started, you should be able
 to open https://localhost:8080/ in your browser. As the certificates under the
 `configuration/lora-app-server/certs` are self-signed, this will raise a warning.
