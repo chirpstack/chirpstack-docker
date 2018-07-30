@@ -2,12 +2,12 @@ version: "2"
 
 services:
   loraserver:
-    image: loraserver/loraserver:1
+    image: loraserver/loraserver:2
     volumes:
       - ./configuration/loraserver:/etc/loraserver
 
   appserver:
-    image: loraserver/lora-app-server:1
+    image: loraserver/lora-app-server:2
     ports:
       - 8080:8080
     volumes:
