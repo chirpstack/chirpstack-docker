@@ -26,6 +26,7 @@ net_id="000000"
 # * US_902_928
 name="EU_863_870"
 
+[network_server.network_settings]
 # Enable only a given sub-set of channels
 #
 # Use this when ony a sub-set of the by default enabled channels are being
