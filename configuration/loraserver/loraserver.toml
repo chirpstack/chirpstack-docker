@@ -78,3 +78,6 @@ password=""
 
 [join_server.default]
 server="http://appserver:8003"
+
+[geolocation_server]
+server="geoserver:8005"

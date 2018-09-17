@@ -20,17 +20,18 @@ services:
     volumes:
       - ./configuration/lora-gateway-bridge:/etc/lora-gateway-bridge
   
+  geoserver:
+    image: loraserver/lora-geo-server:2
+    volumes:
+      - ./configuration/lora-geo-server:/etc/lora-geo-server
+  
   postgresql:
     image: postgres:9.6-alpine
-    ports:
-      - 5432
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
       - ./data/postgresql:/var/lib/postgresql/data
 
   redis:
-    ports:
-      - 6379
     image: redis:4-alpine
     volumes:
       - ./data/redis:/data

@@ -13,6 +13,7 @@ but keep in mind that for production usage it might need modifications.
     * https://www.loraserver.io/lora-gateway-bridge/install/config/
     * https://www.loraserver.io/loraserver/install/config/
     * https://www.loraserver.io/lora-app-server/install/config/
+    * https://www.loraserver.io/lora-geo-server/install/config/
 * `configuration/postgresql/initdb/`: directory containing PostgreSQL initialization scripts
 * `data/postgresql`: directory containing the PostgreSQL data (auto-created)
 * `data/redis`: directory containing the Redis data (auto-created)
