@@ -45,8 +45,7 @@ $ docker-compose up
 
 
 After all the components have been initialized and started, you should be able
-to open https://localhost:8080/ in your browser. As the certificates under the
-`configuration/lora-app-server/certs` are self-signed, this will raise a warning.
+to open http://localhost:8080/ in your browser.
 
 ### Add network-server
 
