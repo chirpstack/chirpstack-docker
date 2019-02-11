@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 
 services:
   loraserver:
@@ -29,14 +29,19 @@ services:
     image: postgres:9.6-alpine
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
-      - ./data/postgresql:/var/lib/postgresql/data
+      - postgresqldata:/var/lib/postgresql/data
 
   redis:
     image: redis:4-alpine
     volumes:
-      - ./data/redis:/data
+      - redisdata:/data
 
   mosquitto:
     image: eclipse-mosquitto
     ports:
       - 1883:1883
+
+volumes:
+  postgresqldata:
+  redisdata:
+

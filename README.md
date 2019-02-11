@@ -15,8 +15,6 @@ but keep in mind that for production usage it might need modifications.
     * https://www.loraserver.io/lora-app-server/install/config/
     * https://www.loraserver.io/lora-geo-server/install/config/
 * `configuration/postgresql/initdb/`: directory containing PostgreSQL initialization scripts
-* `data/postgresql`: directory containing the PostgreSQL data (auto-created)
-* `data/redis`: directory containing the Redis data (auto-created)
 
 ## Configuration
 
@@ -24,6 +22,11 @@ The LoRa Server components are pre-configured to work with the provided
 `docker-compose.yml` file and defaults to the EU868 LoRaWAN band. Please refer
 to the `configuration/loraserver/loraserver.toml` configuration file to
 configure a different band.
+
+# Data persistence
+
+PostgreSQL and Redis data is persisted in Docker volumes, see the `docker-compose.yml`
+`volumes` definition.
 
 ## Requirements
 
