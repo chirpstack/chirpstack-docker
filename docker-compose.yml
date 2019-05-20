@@ -2,26 +2,26 @@ version: "3"
 
 services:
   loraserver:
-    image: loraserver/loraserver:2
+    image: loraserver/loraserver:3
     volumes:
       - ./configuration/loraserver:/etc/loraserver
 
   appserver:
-    image: loraserver/lora-app-server:2
+    image: loraserver/lora-app-server:3
     ports:
       - 8080:8080
     volumes:
       - ./configuration/lora-app-server:/etc/lora-app-server
 
   gatewaybridge:
-    image: loraserver/lora-gateway-bridge:2
+    image: loraserver/lora-gateway-bridge:3
     ports:
       - 1700:1700/udp
     volumes:
       - ./configuration/lora-gateway-bridge:/etc/lora-gateway-bridge
 
   geoserver:
-    image: loraserver/lora-geo-server:2
+    image: loraserver/lora-geo-server:3
     volumes:
       - ./configuration/lora-geo-server:/etc/lora-geo-server
 
@@ -32,14 +32,12 @@ services:
       - postgresqldata:/var/lib/postgresql/data
 
   redis:
-    image: redis:4-alpine
+    image: redis:5-alpine
     volumes:
       - redisdata:/data
 
   mosquitto:
     image: eclipse-mosquitto
-    ports:
-      - 1883:1883
 
 volumes:
   postgresqldata:

@@ -1,0 +1,29 @@
+# See https://www.loraserver.io/loraserver/install/config/ for a full
+# configuration example and documentation.
+#
+# This file is for the US915 band (channels 0-7). See the examples/ folder for more
+# configuration examples.
+
+[postgresql]
+dsn="postgres://loraserver_ns:loraserver_ns@postgresql/loraserver_ns?sslmode=disable"
+
+[redis]
+url="redis://redis:6379"
+
+[network_server]
+net_id="000000"
+
+[network_server.band]
+name="US_902_928"
+
+  [network_server.network_settings]
+  enabled_uplink_channels=[0, 1, 2, 3, 4, 5, 6, 7]
+
+[network_server.gateway.backend.mqtt]
+server="tcp://mosquitto:1883"
+
+[join_server.default]
+server="http://appserver:8003"
+
+[geolocation_server]
+server="geoserver:8005"

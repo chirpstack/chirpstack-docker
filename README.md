@@ -21,8 +21,8 @@ but keep in mind that for production usage it might need modifications.
 
 The LoRa Server components are pre-configured to work with the provided
 `docker-compose.yml` file and defaults to the EU868 LoRaWAN band. Please refer
-to the `configuration/loraserver/loraserver.toml` configuration file to
-configure a different band.
+to the `configuration/loraserver/examples` directory for more configuration
+examples.
 
 # Data persistence
 
