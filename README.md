@@ -9,7 +9,6 @@ but keep in mind that for production usage it might need modifications.
 ## Directory layout
 
 * `docker-compose.yml`: the docker-compose file containing the services
-* `docker-compose-env.yml`: alternate docker-compose file using environment variables, can be run with the docker-compose `-f` flag
 * `configuration/lora*`: directory containing the LoRa Server configuration files, see:
     * https://www.loraserver.io/lora-gateway-bridge/install/config/
     * https://www.loraserver.io/loraserver/install/config/

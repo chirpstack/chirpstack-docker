@@ -16,7 +16,7 @@ services:
   gatewaybridge:
     image: loraserver/lora-gateway-bridge:3
     ports:
-      - 1700:1700/udp
+      - 3001:3001/tcp
     volumes:
       - ./configuration/lora-gateway-bridge:/etc/lora-gateway-bridge
 

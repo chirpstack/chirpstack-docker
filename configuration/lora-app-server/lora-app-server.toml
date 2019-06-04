@@ -15,4 +15,7 @@ public_host="appserver:8001"
 
 [application_server.external_api]
 bind="0.0.0.0:8080"
+
+# JWT secret used for api authentication / authorization
+# You could generate this by executing 'openssl rand -base64 32' for example
 jwt_secret="verysecret"
