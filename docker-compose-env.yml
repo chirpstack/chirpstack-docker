@@ -20,7 +20,7 @@ services:
       - REDIS.URL=redis://redis:6379
       - APPLICATION_SERVER.INTEGRATION.MQTT.SERVER=tcp://mosquitto:1883
       - APPLICATION_SERVER.API.PUBLIC_HOST=appserver:8001
-      - APPLICATION_SERVER.EXTERNAL_API.JWT_SECRET=verysecret
+      - APPLICATION_SERVER.EXTERNAL_API.JWT_SECRET=${JWT_SECRET}
 
   gatewaybridge:
     image: loraserver/lora-gateway-bridge:3
