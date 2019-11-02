@@ -1,4 +1,4 @@
-# See https://www.loraserver.io/lora-geo-server/install/config/ for a full
+# See https://www.chirpstack.io/geolocation-server/install/config/ for a full
 # configuration example and documentation.
 
 [geo_server.backend]

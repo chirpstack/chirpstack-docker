@@ -1,11 +1,11 @@
-# See https://www.loraserver.io/loraserver/install/config/ for a full
+# See https://www.chirpstack.io/network-server/install/config/ for a full
 # configuration example and documentation.
 #
 # This file is for the EU868 band. See the examples/ folder for more
 # configuration examples.
 
 [postgresql]
-dsn="postgres://loraserver_ns:loraserver_ns@postgresql/loraserver_ns?sslmode=disable"
+dsn="postgres://chirpstack_ns:chirpstack_ns@postgresql/chirpstack_ns?sslmode=disable"
 
 [redis]
 url="redis://redis:6379"
@@ -47,7 +47,7 @@ name="EU_863_870"
 server="tcp://mosquitto:1883"
 
 [join_server.default]
-server="http://appserver:8003"
+server="http://chirpstack-application-server:8003"
 
 [geolocation_server]
-server="geoserver:8005"
+server="chirpstack-geolocation-server:8005"

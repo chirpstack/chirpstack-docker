@@ -1,4 +1,4 @@
-# See https://www.loraserver.io/lora-gateway-bridge/install/config/ for a full
+# See https://www.chirpstack.io/gateway-bridge/install/config/ for a full
 # configuration example and documentation.
 
 [integration.mqtt.auth.generic]

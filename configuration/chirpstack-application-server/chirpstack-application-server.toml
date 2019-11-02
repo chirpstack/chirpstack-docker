@@ -1,8 +1,8 @@
-# See https://www.loraserver.io/lora-app-server/install/config/ for a full
+# See https://www.chirpstack.io/application-server/install/config/ for a full
 # configuration example and documentation.
 
 [postgresql]
-dsn="postgres://loraserver_as:loraserver_as@postgresql/loraserver_as?sslmode=disable"
+dsn="postgres://chirpstack_as:chirpstack_as@postgresql/chirpstack_as?sslmode=disable"
 
 [redis]
 url="redis://redis:6379"
@@ -11,7 +11,7 @@ url="redis://redis:6379"
 server="tcp://mosquitto:1883"
 
 [application_server.api]
-public_host="appserver:8001"
+public_host="chirpstack-application-server:8001"
 
 [application_server.external_api]
 bind="0.0.0.0:8080"

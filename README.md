@@ -1,7 +1,7 @@
-# LoRa Server Docker setup
+# ChirpStack Docker example
 
-This repository contains a skeleton to setup the [LoRa Server](https://www.loraserver.io)
-project using [docker-compose](https://docs.docker.com/compose/).
+This repository contains a skeleton to setup the [ChirpStack](https://www.chirpstack.io)
+open-source LoRaWAN Network Server stack using [Docker Compose](https://docs.docker.com/compose/).
 
 **Note:** Please use this `docker-compose.yml` file as a starting point for testing
 but keep in mind that for production usage it might need modifications. 
@@ -10,18 +10,18 @@ but keep in mind that for production usage it might need modifications.
 
 * `docker-compose.yml`: the docker-compose file containing the services
 * `docker-compose-env.yml`: alternate docker-compose file using environment variables, can be run with the docker-compose `-f` flag
-* `configuration/lora*`: directory containing the LoRa Server configuration files, see:
-    * https://www.loraserver.io/lora-gateway-bridge/install/config/
-    * https://www.loraserver.io/loraserver/install/config/
-    * https://www.loraserver.io/lora-app-server/install/config/
-    * https://www.loraserver.io/lora-geo-server/install/config/
+* `configuration/chirpstack*`: directory containing the ChirpStack configuration files, see:
+    * https://www.chirpstack.io/gateway-bridge/install/config/
+    * https://www.chirpstack.io/network-server/install/config/
+    * https://www.chirpstack.io/application-server/install/config/
+    * https://www.chirpstack.io/geolocation-server/install/config/
 * `configuration/postgresql/initdb/`: directory containing PostgreSQL initialization scripts
 
 ## Configuration
 
-The LoRa Server components are pre-configured to work with the provided
+The ChirpStack stack components components are pre-configured to work with the provided
 `docker-compose.yml` file and defaults to the EU868 LoRaWAN band. Please refer
-to the `configuration/loraserver/examples` directory for more configuration
+to the `configuration/chirpstack-network-server/examples` directory for more configuration
 examples.
 
 # Data persistence
@@ -36,7 +36,7 @@ installed.
 
 ## Usage
 
-To start all the LoRa Server components, simply run:
+To start the ChirpStack open-source LoRaWAN Network Server stack, simply run:
 
 ```bash
 $ docker-compose up
@@ -51,8 +51,8 @@ $ docker-compose up
 After all the components have been initialized and started, you should be able
 to open http://localhost:8080/ in your browser.
 
-### Add network-server
+### Add Network Server
 
-When adding the network-server in the LoRa App Server web-interface
-(see [network-servers](https://www.loraserver.io/lora-app-server/use/network-servers/)),
-you must enter `loraserver:8000` as the network-server `hostname:IP`.
+When adding the Network Server in the ChirpStack Application Server web-interface
+(see [Network Servers](https://www.chirpstack.io/application-server/use/network-servers/)),
+you must enter `chirpstack-network-server:8000` as the Network Server `hostname:IP`.
