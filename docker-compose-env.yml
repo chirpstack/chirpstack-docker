@@ -27,7 +27,7 @@ services:
     ports:
       - 1700:1700/udp
     environment:
-      - INTEGRATION.MQTT.AUTH.GENERIC.SERVER=tcp://mosquitto:1883
+      - INTEGRATION__MQTT__AUTH__GENERIC__SERVERS=tcp://mosquitto:1883
 
   chirpstack-geolocation-server:
     image: chirpstack/chirpstack-geolocation-server:3
