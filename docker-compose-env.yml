@@ -4,23 +4,23 @@ services:
   chirpstack-network-server:
     image: chirpstack/chirpstack-network-server:3
     environment:
-      - POSTGRESQL.DSN=postgres://chirpstack_ns:chirpstack_ns@postgresql/chirpstack_ns?sslmode=disable
-      - REDIS.URL=redis://redis:6379
-      - NETWORK_SERVER.BAND.NAME=EU_863_870
-      - NETWORK_SERVER.GATEWAY.BACKEND.MQTT.SERVER=tcp://mosquitto:1883
-      - JOIN_SERVER.DEFAULT.SERVER=http://chirpstack-application-server:8003
-      - GEOLOCATION_SERVER.SERVER=chirpstack-geolocation-server:8005
+      - POSTGRESQL__DSN=postgres://chirpstack_ns:chirpstack_ns@postgresql/chirpstack_ns?sslmode=disable
+      - REDIS__URL=redis://redis:6379
+      - NETWORK_SERVER__BAND__NAME=EU_863_870
+      - NETWORK_SERVER__GATEWAY__BACKEND__MQTT__SERVER=tcp://mosquitto:1883
+      - JOIN_SERVER__DEFAULT__SERVER=http://chirpstack-application-server:8003
+      - GEOLOCATION_SERVER__SERVER=chirpstack-geolocation-server:8005
 
   chirpstack-application-server:
     image: chirpstack/chirpstack-application-server:3
     ports:
       - 8080:8080
     environment:
-      - POSTGRESQL.DSN=postgres://chirpstack_as:chirpstack_as@postgresql/chirpstack_as?sslmode=disable
-      - REDIS.URL=redis://redis:6379
-      - APPLICATION_SERVER.INTEGRATION.MQTT.SERVER=tcp://mosquitto:1883
-      - APPLICATION_SERVER.API.PUBLIC_HOST=chirpstack-application-server:8001
-      - APPLICATION_SERVER.EXTERNAL_API.JWT_SECRET=verysecret
+      - POSTGRESQL__DSN=postgres://chirpstack_as:chirpstack_as@postgresql/chirpstack_as?sslmode=disable
+      - REDIS__URL=redis://redis:6379
+      - APPLICATION_SERVER__INTEGRATION__MQTT__SERVER=tcp://mosquitto:1883
+      - APPLICATION_SERVER__API__PUBLIC_HOST=chirpstack-application-server:8001
+      - APPLICATION_SERVER__EXTERNAL_API__JWT_SECRET=verysecret
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:3
@@ -32,7 +32,7 @@ services:
   chirpstack-geolocation-server:
     image: chirpstack/chirpstack-geolocation-server:3
     environment:
-      - GEO_SERVER.BACKEND.NAME=collos
+      - GEO_SERVER__BACKEND__NAME=collos
 
   postgresql:
     image: postgres:9.6-alpine
