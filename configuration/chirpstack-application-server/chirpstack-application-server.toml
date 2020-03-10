@@ -9,6 +9,8 @@ url="redis://redis:6379"
 
 [application_server.integration.mqtt]
 server="tcp://mosquitto:1883"
+username="chirpstack_as"
+password="chirpstack_as"
 
 [application_server.api]
 public_host="chirpstack-application-server:8001"

@@ -45,6 +45,8 @@ name="EU_863_870"
 
 [network_server.gateway.backend.mqtt]
 server="tcp://mosquitto:1883"
+username="chirpstack_ns"
+password="chirpstack_ns"
 
 [join_server.default]
 server="http://chirpstack-application-server:8003"

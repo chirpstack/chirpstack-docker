@@ -3,5 +3,5 @@
 
 [integration.mqtt.auth.generic]
 servers=["tcp://mosquitto:1883"]
-username=""
-password=""
+username="chirpstack_gw"
+password="chirpstack_gw"
