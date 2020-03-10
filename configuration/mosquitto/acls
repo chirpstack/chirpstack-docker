@@ -1,0 +1,16 @@
+user chirpstack_gw
+topic write gateway/+/event/+
+topic read gateway/+/command/+
+
+user chirpstack_ns
+topic read gateway/+/event/+
+topic write gateway/+/command/+
+
+user chirpstack_as
+topic write application/+/device/+/rx
+topic write application/+/device/+/join
+topic write application/+/device/+/ack
+topic write application/+/device/+/error
+topic read application/+/device/+/tx
+topic write application/+/device/+/status
+topic write application/+/device/+/location

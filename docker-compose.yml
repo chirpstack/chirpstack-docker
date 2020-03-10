@@ -39,9 +39,11 @@ services:
       - redisdata:/data
 
   mosquitto:
-    image: eclipse-mosquitto
+    image: iegomez/mosquitto-go-auth:0.5.0
     ports:
       - 1883:1883
+    volumes:
+      - ./configuration/mosquitto:/etc/mosquitto 
 
 volumes:
   postgresqldata:
