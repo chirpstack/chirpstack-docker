@@ -17,7 +17,7 @@
   "gnetId": 179,
   "graphTooltip": 1,
   "id": 1,
-  "iteration": 1584108076956,
+  "iteration": 1584114424930,
   "links": [],
   "panels": [
     {
@@ -545,13 +545,6 @@
           "metric": "container_network_transmit_bytes_total",
           "refId": "B",
           "step": 2
-        },
-        {
-          "expr": "api_joinserver_request_count",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -662,7 +655,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "no test",
+  "title": "Dashboard",
   "uid": "khiJvLlWz",
-  "version": 17
+  "version": 2
 }
