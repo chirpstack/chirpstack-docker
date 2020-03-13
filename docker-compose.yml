@@ -50,6 +50,21 @@ services:
     volumes:
      - ./configuration/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
+  grafana:
+    image: grafana/grafana:5.4.3
+    ports:
+     - 3000:3000
+    environment:
+      GF_INSTALL_PLUGINS: grafana-simple-json-datasource,jdbranham-diagram-panel
+      VIRTUAL_HOST: lnsmonit.MYDOMAIN.ORG
+      VIRTUAL_PORT: 3000
+      VIRTUAL_PATH: grafana 
+    volumes:
+    - ./configuration/grafana/grafana.ini:/etc/grafana/grafana.ini
+    - ./configuration/grafana/dashboard/:/var/lib/grafana/dashboards/
+    - ./configuration/grafana/dashboard.yaml:/etc/grafana/dashboard.yaml
+    - ./configuration/grafana/datasources/:/etc/grafana/provisioning/datasources/
+    
 volumes:
   postgresqldata:
   redisdata:
