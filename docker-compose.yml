@@ -43,6 +43,13 @@ services:
     ports:
       - 1883:1883
 
+  prometheus:
+    image: prom/prometheus:v2.16.0
+    ports:
+      - 9090:9090
+    volumes:
+     - ./configuration/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
 volumes:
   postgresqldata:
   redisdata:

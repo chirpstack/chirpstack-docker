@@ -16,3 +16,14 @@ public_host="chirpstack-application-server:8001"
 [application_server.external_api]
 bind="0.0.0.0:8080"
 jwt_secret="verysecret"
+
+
+# Metrics collection settings.
+[metrics]
+
+timezone="Local"
+
+  [metrics.prometheus]
+  bind="chirpstack-application-server:9324"
+  endpoint_enabled=true
+  APITimingHistogram=true

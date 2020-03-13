@@ -5,3 +5,13 @@
 servers=["tcp://mosquitto:1883"]
 username=""
 password=""
+
+# Metrics collection settings.
+[metrics]
+
+timezone="Local"
+
+  [metrics.prometheus]
+  bind="chirpstack-gateway-bridge:9325"
+  endpoint_enabled=true
+  APITimingHistogram=true

@@ -51,3 +51,13 @@ server="http://chirpstack-application-server:8003"
 
 [geolocation_server]
 server="chirpstack-geolocation-server:8005"
+
+# Metrics collection settings.
+[metrics]
+
+timezone="Local"
+
+  [metrics.prometheus]
+  bind="chirpstack-network-server:9323"
+  endpoint_enabled=true
+  APITimingHistogram=true
