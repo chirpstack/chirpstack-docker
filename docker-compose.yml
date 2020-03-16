@@ -27,6 +27,8 @@ services:
 
   postgresql:
     image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_PASSWORD=root
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
       - postgresqldata:/var/lib/postgresql/data
