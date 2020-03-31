@@ -14,7 +14,7 @@ url="redis://redis:6379"
 net_id="000000"
 
 [network_server.band]
-name="EU_863_870"
+name="EU868"
 
 [network_server.network_settings]
 
