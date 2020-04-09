@@ -51,6 +51,20 @@ $ docker-compose up
 After all the components have been initialized and started, you should be able
 to open http://localhost:8080/ in your browser.
 
+## Docker swarm deploy
+Deploy in docker swarm cluster
+
+First you need to create a psql-passw for root postgres password
+
+```bash
+$ echo -n "Ingress postgres sql root password: "; read -s pass; echo $pass | docker secret create psql-passw -
+```
+Then deploy in the cluster
+
+```bash
+$ docker stack deploy -c swarm-deploy.yml chirpstack
+```
+
 ### Add Network Server
 
 When adding the Network Server in the ChirpStack Application Server web-interface
