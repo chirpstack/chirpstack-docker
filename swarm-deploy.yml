@@ -1,0 +1,142 @@
+version: "3.7"
+
+services:
+  chirpstack-network-server:
+    image: chirpstack/chirpstack-network-server:3
+    networks:
+      - backend
+    configs:
+      - source: network-server.toml
+        target: /etc/chirpstack-network-server/chirpstack-network-server.toml
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
+  chirpstack-application-server:
+    image: chirpstack/chirpstack-application-server:3
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 8080:8080
+    configs:
+      - source: application-server.toml
+        target: /etc/chirpstack-application-server/chirpstack-application-server.toml
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
+  chirpstack-gateway-bridge:
+    image: chirpstack/chirpstack-gateway-bridge:3
+    networks:
+      - backend
+    ports:
+      - 1700:1700/udp
+    configs:
+      - source: gateway-bridge.toml
+        target: /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
+  chirpstack-geolocation-server:
+    image: chirpstack/chirpstack-geolocation-server:3
+    networks:
+      - backend
+    configs:
+      - source: geolocation-server.toml
+        target: /etc/chirpstack-geolocation-server/chirpstack-geolocation-server.toml
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
+  postgresql:
+    image: postgres:9.6-alpine
+    networks:
+      - backend
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/psql-passw
+    volumes:
+      - type: volume
+        source: postgresqldata
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: ./configuration/postgresql/initdb
+        target: /docker-entrypoint-initdb.d
+    secrets:
+      - psql-passw
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
+  redis:
+    image: redis:5-alpine
+    networks:
+      - backend
+    volumes:
+      - redisdata:/data
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
+
+  mosquitto:
+    image: eclipse-mosquitto:1.6
+    networks:
+      - backend
+    ports:
+      - 1883:1883
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
+volumes:
+  postgresqldata:
+  redisdata:
+
+networks:
+  frontend:
+  backend:
+
+configs:
+  network-server.toml:
+    file: ./configuration/chirpstack-network-server/chirpstack-network-server.toml
+  application-server.toml:
+    file: ./configuration/chirpstack-application-server/chirpstack-application-server.toml
+  geolocation-server.toml:
+    file: ./configuration/chirpstack-geolocation-server/chirpstack-geolocation-server.toml
+  gateway-bridge.toml:
+    file: ./configuration/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+
+secrets:
+  psql-passw:
+    external: true
+    
