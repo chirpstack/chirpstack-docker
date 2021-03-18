@@ -10,6 +10,9 @@ services:
       - NETWORK_SERVER__GATEWAY__BACKEND__MQTT__SERVER=tcp://mosquitto:1883
       - JOIN_SERVER__DEFAULT__SERVER=http://chirpstack-application-server:8003
       - GEOLOCATION_SERVER__SERVER=chirpstack-geolocation-server:8005
+    depends_on:
+      - postgresql
+      - mosquitto
 
   chirpstack-application-server:
     image: chirpstack/chirpstack-application-server:3
@@ -21,6 +24,8 @@ services:
       - APPLICATION_SERVER__INTEGRATION__MQTT__SERVER=tcp://mosquitto:1883
       - APPLICATION_SERVER__API__PUBLIC_HOST=chirpstack-application-server:8001
       - APPLICATION_SERVER__EXTERNAL_API__JWT_SECRET=verysecret
+    depends_on:
+      - chirpstack-network-server
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:3
@@ -28,6 +33,8 @@ services:
       - 1700:1700/udp
     environment:
       - INTEGRATION__MQTT__AUTH__GENERIC__SERVERS=tcp://mosquitto:1883
+    depends_on: 
+      - mosquitto
 
   chirpstack-geolocation-server:
     image: chirpstack/chirpstack-geolocation-server:3

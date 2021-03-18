@@ -5,6 +5,9 @@ services:
     image: chirpstack/chirpstack-network-server:3
     volumes:
       - ./configuration/chirpstack-network-server:/etc/chirpstack-network-server
+    depends_on:
+      - postgresql
+      - mosquitto
 
   chirpstack-application-server:
     image: chirpstack/chirpstack-application-server:3
@@ -12,6 +15,8 @@ services:
       - 8080:8080
     volumes:
       - ./configuration/chirpstack-application-server:/etc/chirpstack-application-server
+    depends_on:
+      - chirpstack-network-server
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:3
@@ -19,6 +24,8 @@ services:
       - 1700:1700/udp
     volumes:
       - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+    depends_on: 
+      - mosquitto
 
   chirpstack-geolocation-server:
     image: chirpstack/chirpstack-geolocation-server:3
