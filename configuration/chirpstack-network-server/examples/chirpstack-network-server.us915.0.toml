@@ -17,7 +17,7 @@ net_id="000000"
 name="US915"
 
   [network_server.network_settings]
-  enabled_uplink_channels=[0, 1, 2, 3, 4, 5, 6, 7]
+  enabled_uplink_channels=[0, 1, 2, 3, 4, 5, 6, 7, 64]
 
 [network_server.gateway.backend.mqtt]
 server="tcp://mosquitto:1883"
