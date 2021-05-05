@@ -1,13 +1,20 @@
-version: "3"
+version: '3.6'
 
 services:
   chirpstack-network-server:
     image: chirpstack/chirpstack-network-server:3
     volumes:
       - ./configuration/chirpstack-network-server:/etc/chirpstack-network-server
+    environment:
+      POSTGRESQL__DSN: "postgres://chirpstack_ns:chirpstack_ns@postgresql/chirpstack_ns?sslmode=disable"
+      REDIS__URL: "redis://redis:6379"
+      NETWORK_SERVER__BAND__NAME: "EU868"
+      NETWORK_SERVER__GATEWAY__BACKEND__MQTT__SERVER: "tcp://mosquitto:1883"
+      JOIN_SERVER__DEFAULT__SERVER: "http://chirpstack-application-server:8003"
+      GEOLOCATION_SERVER__SERVER: "chirpstack-geolocation-server:8005"
     depends_on:
-      - postgresql
-      - mosquitto
+      - "postgresql"
+      - "mosquitto"
 
   chirpstack-application-server:
     image: chirpstack/chirpstack-application-server:3
@@ -15,8 +22,14 @@ services:
       - 8080:8080
     volumes:
       - ./configuration/chirpstack-application-server:/etc/chirpstack-application-server
+    environment:
+      POSTGRESQL__DSN: "postgres://chirpstack_as:chirpstack_as@postgresql/chirpstack_as?sslmode=disable"
+      REDIS__URL: "redis://redis:6379"
+      APPLICATION_SERVER__INTEGRATION__MQTT__SERVER: "tcp://mosquitto:1883"
+      APPLICATION_SERVER__API__PUBLIC_HOST: "chirpstack-application-server:8001"
+      APPLICATION_SERVER__EXTERNAL_API__JWT_SECRET: "verysecret"
     depends_on:
-      - chirpstack-network-server
+      - "chirpstack-network-server"
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:3
@@ -24,22 +37,57 @@ services:
       - 1700:1700/udp
     volumes:
       - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+    environment:
+       INTEGRATION__MQTT__AUTH__GENERIC__SERVERS: "tcp://mosquitto:1883"
     depends_on: 
-      - mosquitto
+      - "mosquitto"
 
   chirpstack-geolocation-server:
     image: chirpstack/chirpstack-geolocation-server:3
     volumes:
       - ./configuration/chirpstack-geolocation-server:/etc/chirpstack-geolocation-server
-
-  postgresql:
-    image: postgres:9.6-alpine
     environment:
-      - POSTGRES_PASSWORD=root
+      GEO_SERVER__BACKEND__NAME: "collos"
+
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      TZ: "Africa/Johannesburg"
+    ports:
+      - 1880:1880
+    networks:
+      - node-red-net
+    volumes:
+      - ./configuration/node-red:/data
+  # dump1090:
+  #   image: jraviles/dump1090
+  #   ports:
+  #     - 8081:8081/tcp
+  #   devices:
+  #     - /dev/fd/3
+  #   restart: unless-stopped
+  postgresql:
+    image: postgres:12
+    restart: always
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
-      - postgresqldata:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
 
+  graphql-engine:
+    image: hasura/graphql-engine:v2.0.0-alpha.10
+    ports:
+      - "8082:8082"
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://griffon:griffon@postgresql/griffon
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+    depends_on:
+      - "postgresql"
+    restart: always
+  
   redis:
     image: redis:5-alpine
     volumes:
@@ -53,5 +101,7 @@ services:
       - ./configuration/eclipse-mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
 volumes:
-  postgresqldata:
+  db_data:
   redisdata:
+networks:
+  node-red-net:
