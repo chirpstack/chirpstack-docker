@@ -26,6 +26,3 @@ server="tcp://mosquitto:1883"
 
 [join_server.default]
 server="http://chirpstack-application-server:8003"
-
-[geolocation_server]
-server="chirpstack-geolocation-server:8005"

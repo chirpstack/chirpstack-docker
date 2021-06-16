@@ -36,11 +36,6 @@ services:
     depends_on: 
       - mosquitto
 
-  chirpstack-geolocation-server:
-    image: chirpstack/chirpstack-geolocation-server:3
-    environment:
-      - GEO_SERVER__BACKEND__NAME=collos
-
   postgresql:
     image: postgres:9.6-alpine
     environment:

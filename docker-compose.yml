@@ -27,11 +27,6 @@ services:
     depends_on: 
       - mosquitto
 
-  chirpstack-geolocation-server:
-    image: chirpstack/chirpstack-geolocation-server:3
-    volumes:
-      - ./configuration/chirpstack-geolocation-server:/etc/chirpstack-geolocation-server
-
   postgresql:
     image: postgres:9.6-alpine
     environment:
