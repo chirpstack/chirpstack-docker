@@ -14,7 +14,6 @@ but keep in mind that for production usage it might need modifications.
     * https://www.chirpstack.io/gateway-bridge/install/config/
     * https://www.chirpstack.io/network-server/install/config/
     * https://www.chirpstack.io/application-server/install/config/
-    * https://www.chirpstack.io/geolocation-server/install/config/
 * `configuration/postgresql/initdb/`: directory containing PostgreSQL initialization scripts
 
 ## Configuration
