@@ -3,5 +3,8 @@
 
 [integration.mqtt.auth.generic]
 servers=["tcp://mosquitto:1883"]
+event_topic_template="eu868/gateway/{{ .GatewayID }}/event/{{ .EventType }}"
+state_topic_template="eu868/gateway/{{ .GatewayID }}/state/{{ .StateType }}"
+command_topic_template="eu868/gateway/{{ .GatewayID }}/command/#"
 username=""
 password=""
