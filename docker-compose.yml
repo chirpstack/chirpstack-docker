@@ -24,6 +24,14 @@ services:
     depends_on: 
       - mosquitto
 
+  chirpstack-rest-api:
+    image: chirpstack/chirpstack-rest-api:4.0.0-rc.1
+    command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
+    ports:
+      - 8090:8090
+    depends_on:
+      - chirpstack
+
   postgres:
     image: postgres:14-alpine
     volumes:

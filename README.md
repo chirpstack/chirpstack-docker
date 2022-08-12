@@ -17,7 +17,8 @@ but keep in mind that for production usage it might need modifications.
 ## Configuration
 
 This setup is pre-configured for all regions. You can either connect a ChirpStack Gateway Bridge
-instance (v3.14.0+) to the MQTT broker (port 1883). Please note that:
+instance (v3.14.0+) to the MQTT broker (port 1883) or connect a Semtech UDP Packet Forwarder.
+Please note that:
 
 * You must prefix the MQTT topic with the region
   Please see the region configuration files in the `configuration/chirpstack` for a list
@@ -60,3 +61,11 @@ $ docker-compose up
 
 After all the components have been initialized and started, you should be able
 to open http://localhost:8080/ in your browser.
+
+##
+
+The example includes the [ChirpStack REST API](https://github.com/chirpstack/chirpstack-rest-api).
+You should be able to access the UI by opening http://localhost:8090 in your browser.
+
+**Note:** It is recommended to use the [gRPC](https://www.chirpstack.io/docs/chirpstack/api/grpc.html)
+interface over the [REST](https://www.chirpstack.io/docs/chirpstack/api/rest.html) interface.
