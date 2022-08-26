@@ -56,7 +56,7 @@ commands installed.
 To start the ChirpStack simply run:
 
 ```bash
-$ docker-compose up
+$ POSTGRES_USER=postgres docker-compose up
 ```
 
 After all the components have been initialized and started, you should be able
