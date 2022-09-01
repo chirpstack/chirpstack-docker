@@ -12,6 +12,10 @@ services:
       - postgres
       - mosquitto
       - redis
+    environment:
+      - MQTT_BROKER_HOST=mosquitto
+      - REDIS_HOST=redis
+      - POSTGRESQL_HOST=postgres
     ports:
       - 8080:8080
 
