@@ -2,7 +2,7 @@ version: "3"
 
 services:
   chirpstack:
-    image: chirpstack/chirpstack:4.0.0
+    image: chirpstack/chirpstack:4.0.2
     command: -c /etc/chirpstack
     restart: unless-stopped
     volumes:
@@ -30,7 +30,7 @@ services:
       - mosquitto
 
   chirpstack-rest-api:
-    image: chirpstack/chirpstack-rest-api:4.0.0
+    image: chirpstack/chirpstack-rest-api:4.0.2
     restart: unless-stopped
     command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
     ports:
