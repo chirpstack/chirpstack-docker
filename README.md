@@ -48,8 +48,7 @@ make import-lorawan-devices
 ```
 
 This will clone the `lorawan-devices` repository and execute the `import-ttn-lorawan-devices`
-command of ChirpStack. Please note that for this step, you need to have the `git` and `make`
-commands installed.
+command of ChirpStack. Please note that for this step you need to have the `make` command installed.
 
 ## Usage
 
