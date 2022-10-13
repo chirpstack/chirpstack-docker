@@ -1,11 +1,9 @@
 import os
-# import awsiot.greengrasscoreipc
-# import awsiot.greengrasscoreipc.client as client
-# import awsiot.greengrasscoreipc.model as model
+import awsiot.greengrasscoreipc
+import awsiot.greengrasscoreipc.client as client
+import awsiot.greengrasscoreipc.model as model
 import json
 import paho.mqtt.client as mqtt
-
-# ipc_client = awsiot.greengrasscoreipc.connect()
 
 print(os.environ)
 
@@ -20,14 +18,17 @@ def on_message(client, userdata, msg):
     payload: payload['object']
   }
   print(message)
-  # publish_operation = ipc_client.new_publish_to_iot_core()
-  # publish_operation.activate(
-  #   request = model.PublishToIoTCoreRequest(
-  #     topic_name = 'MCT/PY/FD',
-  #     qos = model.QOS.AT_MOST_ONCE,
-  #     payload = json.dumps(message).encode()
-  #   )
-  # )
+  ipc_client = awsiot.greengrasscoreipc.connect()
+
+  publish_operation = ipc_client.new_publish_to_iot_core()
+
+  publish_operation.activate(
+    request = model.PublishToIoTCoreRequest(
+      topic_name = 'MCT/PY/FD',
+      qos = model.QOS.AT_MOST_ONCE,
+      payload = json.dumps(message).encode()
+    )
+  )
 
 client = mqtt.Client()
 client.on_connect = on_connect
