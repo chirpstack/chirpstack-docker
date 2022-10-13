@@ -72,7 +72,6 @@ services:
       - AWS_CONTAINER_CREDENTIALS_FULL_URI
       - AWS_IOT_THING_NAME
     volumes:
-      - ../forwarder:/forwarder
       - /greengrass/v2:/greengrass/v2
 
 volumes:

@@ -6,7 +6,7 @@ RUN pip install -r ./requirements.txt
 
 # COPY app.py ./
 
-CMD ["python", "/forwarder/app.py"]
+CMD ["python", "app.py"]
 
 RUN adduser --system forwarder
 USER forwarder
