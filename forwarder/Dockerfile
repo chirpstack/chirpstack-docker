@@ -4,9 +4,9 @@ COPY requirements.txt ./
 RUN apt-get update && apt-get install -y cmake
 RUN pip install -r ./requirements.txt
 
-COPY app.py ./
+# COPY app.py ./
 
-CMD ["python", "app.py"]
+CMD ["python", "/forwarder/app.py"]
 
 RUN adduser --system forwarder
 USER forwarder
