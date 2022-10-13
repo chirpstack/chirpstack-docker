@@ -14,27 +14,29 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
   # @TODO add DevEUI to topic
   topic = "{}/up".format(os.environ["AWS_IOT_THING_NAME"])
-  payload = json.loads(str(msg.payload.decode("utf-8")))
-  print(payload)
+  data = json.loads(str(msg.payload.decode("utf-8")))
+  print(data['object'])
   # print(payload['rxInfo']['gatewayId'])
   # print(payload['deviceInfo']['devEui'])
-  message = {
+  payload = json.dumps({
     # "GatewayEui": payload['rxInfo']['gatewayId'],
     # "DevEui": payload['deviceInfo']['devEui'],
-    "Payload": payload
-  }
-  print(message)
+    "Payload": data['object']
+  }).encode()
+
   ipc_client = awsiot.greengrasscoreipc.connect()
 
   publish_operation = ipc_client.new_publish_to_iot_core()
 
+  print(payload)
   publish_operation.activate(
     request = model.PublishToIoTCoreRequest(
       topic_name = topic,
       qos = model.QOS.AT_MOST_ONCE,
-      payload = json.dumps(message).encode()
+      payload = payload
     )
   )
+  print('pub success')
 
 client = mqtt.Client()
 client.on_connect = on_connect
