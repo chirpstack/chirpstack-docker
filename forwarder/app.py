@@ -15,11 +15,13 @@ def on_message(client, userdata, msg):
   # @TODO add DevEUI to topic
   topic = "{}/up".format(os.environ["AWS_IOT_THING_NAME"])
   payload = json.loads(str(msg.payload.decode("utf-8")))
-  print(payload['object'])
+  print(payload)
+  # print(payload['rxInfo']['gatewayId'])
+  # print(payload['deviceInfo']['devEui'])
   message = {
-    "GatewayEui": payload['rxInfo']['gatewayId'],
-    "DevEui": payload['deviceInfo']['devEui'],
-    "Payload": payload['object']
+    # "GatewayEui": payload['rxInfo']['gatewayId'],
+    # "DevEui": payload['deviceInfo']['devEui'],
+    "Payload": payload
   }
   print(message)
   ipc_client = awsiot.greengrasscoreipc.connect()
