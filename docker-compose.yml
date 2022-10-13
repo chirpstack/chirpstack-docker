@@ -61,6 +61,10 @@ services:
     volumes: 
       - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
+  forwarder:
+    build: ./forwarder
+    restart: unless-stopped
+
 volumes:
   postgresqldata:
   redisdata:
