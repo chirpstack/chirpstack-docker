@@ -12,10 +12,14 @@ def on_connect(client, userdata, flags, rc):
   client.subscribe("application/+/device/+/event/up")
 
 def on_message(client, userdata, msg):
+  # @TODO add DevEUI to topic
+  topic = "{}/up".format(os.environ["AWS_IOT_THING_NAME"])
   payload = json.loads(str(msg.payload.decode("utf-8")))
   print(payload['object'])
   message = {
-    payload: payload['object']
+    "GatewayEui": payload['rxInfo']['gatewayId'],
+    "DevEui": payload['deviceInfo']['devEui'],
+    "Payload": payload['object']
   }
   print(message)
   ipc_client = awsiot.greengrasscoreipc.connect()
@@ -24,7 +28,7 @@ def on_message(client, userdata, msg):
 
   publish_operation.activate(
     request = model.PublishToIoTCoreRequest(
-      topic_name = 'MCT/PY/FD',
+      topic_name = topic,
       qos = model.QOS.AT_MOST_ONCE,
       payload = json.dumps(message).encode()
     )
