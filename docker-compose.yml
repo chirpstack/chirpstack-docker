@@ -73,6 +73,8 @@ services:
       - AWS_IOT_THING_NAME
     volumes:
       - /greengrass/v2:/greengrass/v2
+    depends_on: 
+      - mosquitto
 
 volumes:
   postgresqldata:
