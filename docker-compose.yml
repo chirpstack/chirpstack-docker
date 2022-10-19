@@ -61,21 +61,6 @@ services:
     volumes: 
       - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
-  forwarder:
-    build: ./forwarder
-    restart: unless-stopped
-    environment:
-      - AWS_REGION
-      - SVCUID
-      - AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT
-      - AWS_CONTAINER_AUTHORIZATION_TOKEN
-      - AWS_CONTAINER_CREDENTIALS_FULL_URI
-      - AWS_IOT_THING_NAME
-    volumes:
-      - /greengrass/v2:/greengrass/v2
-    depends_on: 
-      - mosquitto
-
 volumes:
   postgresqldata:
   redisdata:
