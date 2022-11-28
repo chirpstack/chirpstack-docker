@@ -2,7 +2,7 @@ version: "3"
 
 services:
   chirpstack:
-    image: chirpstack/chirpstack:4.0.4
+    image: chirpstack/chirpstack:4.0.5
     command: -c /etc/chirpstack
     restart: unless-stopped
     volumes:
