@@ -38,17 +38,20 @@ PostgreSQL and Redis data is persisted in Docker volumes, see the `docker-compos
 Before using this `docker-compose.yml` file, make sure you have [Docker](https://www.docker.com/community-edition)
 installed.
 
-## Importing TTN device repository
+## Importing device repository
 
-To import the TTN [lorawan-devices](https://github.com/TheThingsNetwork/lorawan-devices)
+To import the [lorawan-devices](https://github.com/TheThingsNetwork/lorawan-devices)
 repository (optional step), run the following command:
 
 ```bash
 make import-lorawan-devices
 ```
 
-This will clone the `lorawan-devices` repository and execute the `import-ttn-lorawan-devices`
-command of ChirpStack. Please note that for this step you need to have the `make` command installed.
+This will clone the `lorawan-devices` repository and execute the import command of ChirpStack.
+Please note that for this step you need to have the `make` command installed.
+
+**Note:** an older snapshot of the `lorawan-devices` repository is cloned as the
+latest revision no longer contains a `LICENSE` file.
 
 ## Usage
 
