@@ -3,4 +3,4 @@ import-lorawan-devices:
 		apt-get update && \
 		apt-get install -y make git && \
 		git clone https://github.com/brocaar/lorawan-devices /tmp/lorawan-devices && \
-		chirpstack -c /etc/chirpstack import-ttn-lorawan-devices -d /tmp/lorawan-devices'
+		chirpstack -c /etc/chirpstack import-legacy-lorawan-devices-repository -d /tmp/lorawan-devices'
