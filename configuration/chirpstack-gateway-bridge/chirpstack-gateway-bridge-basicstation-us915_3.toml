@@ -1,0 +1,40 @@
+# See https://www.chirpstack.io/gateway-bridge/install/config/ for a full
+# configuration example and documentation.
+
+[integration.mqtt.auth.generic]
+servers=["tcp://mosquitto:1883"]
+username=""
+password=""
+
+[backend]
+type="basic_station"
+
+  [backend.basic_station]
+  bind=":3001"
+  tls_cert=""
+  tls_key=""
+  ca_cert=""
+
+  region="US915"
+  frequency_min=923000000
+  frequency_max=928000000
+
+
+  [[backend.basic_station.concentrators]]
+
+    [backend.basic_station.concentrators.multi_sf]
+    frequencies=[
+      907100000,
+      907300000,
+      907500000,
+      907700000,
+      907900000,
+      908100000,
+      908300000,
+      908500000,
+    ]
+  
+    [backend.basic_station.concentrators.lora_std]
+    frequency=907800000
+    bandwidth=500000  
+    spreading_factor=8
