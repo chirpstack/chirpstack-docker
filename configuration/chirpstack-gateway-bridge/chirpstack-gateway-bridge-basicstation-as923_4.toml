@@ -6,6 +6,11 @@ servers=["tcp://mosquitto:1883"]
 username=""
 password=""
 
+[integration.mqtt]
+event_topic_template="as923_4/gateway/{{ .GatewayID }}/event/{{ .EventType }}"
+state_topic_template="as923_4/gateway/{{ .GatewayID }}/state/{{ .StateType }}"
+command_topic_template="as923_4/gateway/{{ .GatewayID }}/command/#"
+
 [backend]
 type="basic_station"
 
