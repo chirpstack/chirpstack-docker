@@ -20,7 +20,7 @@ type="basic_station"
   tls_key=""
   ca_cert=""
 
-  region="US915"
+  region="CN470"
   frequency_min=470000000
   frequency_max=510000000
 
