@@ -56,6 +56,8 @@ services:
   postgres:
     image: postgres:14-alpine
     restart: unless-stopped
+    ports:
+      - 5432:5432
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
       - postgresqldata:/var/lib/postgresql/data

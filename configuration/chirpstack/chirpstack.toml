@@ -99,8 +99,13 @@
 
 
 [integration]
-  enabled=["mqtt"]
+  enabled=["mqtt", "postgresql"]
 
   [integration.mqtt]
     server="tcp://$MQTT_BROKER_HOST:1883/"
     json=true
+
+  [integration.postgresql]
+    dsn="postgres://chirpstack:chirpstack@localhost/chirpstack_integration?sslmode=disable"
+
+
