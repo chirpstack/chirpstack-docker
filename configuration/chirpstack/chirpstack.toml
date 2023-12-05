@@ -106,6 +106,6 @@
     json=true
 
   [integration.postgresql]
-    dsn="postgres://chirpstack:chirpstack@localhost/chirpstack_integration?sslmode=disable"
+    dsn="postgres://chirpstack:chirpstack@postgres/chirpstack_integration?sslmode=disable"
 
 

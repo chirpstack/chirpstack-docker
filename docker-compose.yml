@@ -54,6 +54,7 @@ services:
       - chirpstack
 
   postgres:
+    container_name: postgres
     image: postgres:14-alpine
     restart: unless-stopped
     ports:
