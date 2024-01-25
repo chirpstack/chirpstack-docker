@@ -6,8 +6,8 @@ services:
     command: -c /etc/chirpstack
     restart: unless-stopped
     volumes:
-      - ./configuration/chirpstack:/etc/chirpstack
-      - ./lorawan-devices:/opt/lorawan-devices
+      - ./configuration/chirpstack:/etc/chirpstack:z
+      - ./lorawan-devices:/opt/lorawan-devices:z
     depends_on:
       - postgres
       - mosquitto
@@ -25,7 +25,7 @@ services:
     ports:
       - 1700:1700/udp
     volumes:
-      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge:z
     environment:
       - INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE=eu868/gateway/{{ .GatewayID }}/event/{{ .EventType }}
       - INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE=eu868/gateway/{{ .GatewayID }}/state/{{ .StateType }}
@@ -40,7 +40,7 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge:z
     depends_on:
       - mosquitto
 
@@ -57,8 +57,8 @@ services:
     image: postgres:14-alpine
     restart: unless-stopped
     volumes:
-      - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
-      - postgresqldata:/var/lib/postgresql/data
+      - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d:Z
+      - postgresqldata:/var/lib/postgresql/data:Z
     environment:
       - POSTGRES_PASSWORD=root
 
@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
     command: redis-server --save 300 1 --save 60 100 --appendonly no
     volumes:
-      - redisdata:/data
+      - redisdata:/data:z
 
   mosquitto:
     image: eclipse-mosquitto:2
@@ -75,7 +75,7 @@ services:
     ports:
       - 1883:1883
     volumes: 
-      - ./configuration/mosquitto/config/:/mosquitto/config/
+      - ./configuration/mosquitto/config/:/mosquitto/config/:Z
 
 volumes:
   postgresqldata:
