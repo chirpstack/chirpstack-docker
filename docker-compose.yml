@@ -7,7 +7,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./configuration/chirpstack:/etc/chirpstack
-      - ./lorawan-devices:/opt/lorawan-devices
     depends_on:
       - postgres
       - mosquitto
