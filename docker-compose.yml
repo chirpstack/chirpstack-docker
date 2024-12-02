@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   chirpstack:
     image: chirpstack/chirpstack:4
