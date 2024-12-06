@@ -57,7 +57,9 @@ services:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
       - postgresqldata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=chirpstack
+      - POSTGRES_PASSWORD=chirpstack
+      - POSTGRES_DB=chirpstack
 
   redis:
     image: redis:7-alpine
