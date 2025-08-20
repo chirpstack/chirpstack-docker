@@ -1,7 +1,14 @@
 # hidden files, exluding gitattributes
 .*
 !.gitattributes
+!.env_example
 
 # data folder
 /data
 /lorawan-devices
+
+# Ignore environment files
+.env
+.env.*
+
+/configuration/chirpstack/mqtt_*

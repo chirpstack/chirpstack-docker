@@ -18,7 +18,12 @@
   #  * disable - Do not use TLS
   #  * prefer - Attempt to connect with TLS but allow sessions without
   #  * require - Require the use of TLS
-  dsn="postgres://chirpstack:chirpstack@$POSTGRESQL_HOST/chirpstack?sslmode=disable"
+  dsn = "$POSTGRESQL__DSN"
+
+  # NEW in v4.7+: path to the CA used to validate the server cert
+  ca_cert = "$POSTGRESQL__CA__CERT"
+
+  automigrate = true
 
   # Max open connections.
   #
@@ -39,9 +44,10 @@
   # Server address or addresses.
   #
   # Set multiple addresses when connecting to a cluster.
-  servers=[
-    "redis://$REDIS_HOST/",
-  ]
+  servers=["$REDIS__SERVER"]
+
+  pool_size=20
+  database=0
 
   # TLS enabled.
   tls_enabled=false
@@ -101,5 +107,13 @@
   enabled=["mqtt"]
 
   [integration.mqtt]
-    server="tcp://$MQTT_BROKER_HOST:1883/"
+    server="$AWS__IOT__ENDPOINT"
     json=true
+
+    client_id="$CHIRPSTACK__ENVIRONMENT-$CHIRPSTACK__HOSTNAME"
+    event_topic="$CHIRPSTACK__ENVIRONMENT/application/{{application_id}}/device/{{dev_eui}}/event/{{event}}"
+    command_topic="$CHIRPSTACK__ENVIRONMENT/application/{{application_id}}/device/{{dev_eui}}/command/{{command}}"
+
+    tls_cert="/etc/chirpstack/mqtt_cert.crt"
+    tls_key="/etc/chirpstack/mqtt_key.key"
+    ca_cert="/etc/chirpstack/mqtt_ca.pem"

@@ -97,3 +97,25 @@ You should be able to access the UI by opening http://localhost:8090 in your bro
 
 **Note:** It is recommended to use the [gRPC](https://www.chirpstack.io/docs/chirpstack/api/grpc.html)
 interface over the [REST](https://www.chirpstack.io/docs/chirpstack/api/rest.html) interface.
+
+## Setup Instructions
+
+### 1. Download RDS CA Certificate Bundle
+Amazon RDS requires SSL/TLS for secure connections. Download the combined CA bundle:
+
+```bash
+curl https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem -o rds-combined-ca-bundle.pem
+```
+
+### 2. Enable Required PostgreSQL Extension
+Execute the command below in the database.
+```bash
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+```
+
+### 3. Run ChirpStack with Docker Compose
+```bash
+docker-compose up -d
+docker compose-up -d --force-recreate --no-deps chirpstack-gateway-bridge chirpstack
+docker-compose down
+```
