@@ -110,7 +110,7 @@
     server="$AWS__IOT__ENDPOINT"
     json=true
 
-    client_id="$CHIRPSTACK__ENVIRONMENT-$CHIRPSTACK__HOSTNAME"
+    client_id="as-$CHIRPSTACK__ENVIRONMENT-$CHIRPSTACK__HOSTNAME"
     event_topic="$CHIRPSTACK__ENVIRONMENT/application/{{application_id}}/device/{{dev_eui}}/event/{{event}}"
     command_topic="$CHIRPSTACK__ENVIRONMENT/application/{{application_id}}/device/{{dev_eui}}/command/{{command}}"
 

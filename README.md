@@ -116,6 +116,6 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ### 3. Run ChirpStack with Docker Compose
 ```bash
 docker-compose up -d
-docker compose-up -d --force-recreate --no-deps chirpstack-gateway-bridge chirpstack
+docker-compose up -d --force-recreate --no-deps
 docker-compose down
 ```
