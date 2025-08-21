@@ -87,6 +87,13 @@
     "us915_1",
   ]
 
+  [network]
+  # Maximum items in the downlink queue per device.
+  max_device_queue_size=16
+
+  # Optional expiration (if supported by your version).
+  device_queue_expiration="168h"   # 7 days
+
 
 # API interface configuration.
 [api]
