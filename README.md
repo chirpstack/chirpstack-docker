@@ -66,18 +66,15 @@ installed.
 
 ## Importing device repository
 
-To import the [lorawan-devices](https://github.com/TheThingsNetwork/lorawan-devices)
+To import the [chirpstack-device-profiles](https://github.com/chirpstack/chirpstack-device-profiles)
 repository (optional step), run the following command:
 
 ```bash
-make import-lorawan-devices
+make import-device-profiles
 ```
 
-This will clone the `lorawan-devices` repository and execute the import command of ChirpStack.
+This will clone the `chirpstack-device-profiles` repository and execute the import command of ChirpStack.
 Please note that for this step you need to have the `make` command installed.
-
-**Note:** an older snapshot of the `lorawan-devices` repository is cloned as the
-latest revision no longer contains a `LICENSE` file.
 
 ## Usage
 
